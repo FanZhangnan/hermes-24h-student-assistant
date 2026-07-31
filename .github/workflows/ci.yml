@@ -15,10 +15,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.9"
+      - name: 编译检查
+        run: python3 -m compileall -q lib scripts tools skills tests
       - name: 运行单元测试
         run: python3 -m unittest discover -s tests -v
       - name: 执行公开发布守门
         run: python3 tools/release_guard.py --root . --mode public
+      - name: 提交空白检查
+        run: git show --check --format= HEAD
 
   windows:
     runs-on: windows-latest
@@ -27,7 +31,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.9"
+      - name: 编译检查
+        run: python -m compileall -q lib scripts tools skills tests
       - name: 运行单元测试
         run: python -m unittest discover -s tests -v
       - name: 执行公开发布守门
         run: python tools/release_guard.py --root . --mode public
+      - name: 提交空白检查
+        run: git show --check --format= HEAD

@@ -84,7 +84,9 @@ class DistributionContractTests(unittest.TestCase):
 
         workflow = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
         self.assertIn("python3 -m unittest discover -s tests -v", workflow)
+        self.assertIn("python3 -m compileall -q lib scripts tools skills tests", workflow)
         self.assertIn("tools/release_guard.py --root . --mode public", workflow)
+        self.assertIn("git show --check --format= HEAD", workflow)
 
         license_text = (ROOT / "LICENSE").read_text(encoding="utf-8")
         self.assertIn("MIT License", license_text)
