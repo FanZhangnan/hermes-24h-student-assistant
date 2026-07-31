@@ -25,7 +25,7 @@
 ## 环境要求
 
 - Hermes Agent `>=0.19.0`。
-- Python `>=3.9`，运行时代码只使用 Python 标准库。
+- Python `>=3.9`。业务代码使用标准库；Windows 需要 `requirements.txt` 中的 IANA 时区数据包。
 - Gateway 和 Cron 投递时，设备必须保持唤醒、联网并已连接消息平台。
 
 密钥、Telegram Bot Token、`ALLOWED_USERS` 和 `HOME_CHANNEL` 必须保存在用户自己的 Hermes
@@ -46,6 +46,7 @@ python3 tools/install_local.py --profile 24h-assistant --clone-from default
 Windows PowerShell：
 
 ```powershell
+python -m pip install -r requirements.txt
 .\tools\install_local.ps1 --profile 24h-assistant --clone-from default
 ```
 

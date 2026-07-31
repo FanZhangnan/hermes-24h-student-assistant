@@ -72,6 +72,7 @@ class DistributionContractTests(unittest.TestCase):
             "SECURITY.md",
             ".env.example",
             "config.example.yaml",
+            "requirements.txt",
             "cron_contract.json",
             "privacy_denylist.sha256",
             "tools/release_guard.py",
@@ -85,6 +86,7 @@ class DistributionContractTests(unittest.TestCase):
         workflow = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
         self.assertIn("python3 -m unittest discover -s tests -v", workflow)
         self.assertIn("python3 -m compileall -q lib scripts tools skills tests", workflow)
+        self.assertIn("python -m pip install -r requirements.txt", workflow)
         self.assertIn("tools/release_guard.py --root . --mode public", workflow)
         self.assertIn("git show --check --format= HEAD", workflow)
 

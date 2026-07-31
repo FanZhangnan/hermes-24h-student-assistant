@@ -31,6 +31,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.9"
+      - name: 安装 Windows 时区数据
+        run: python -m pip install -r requirements.txt
       - name: 编译检查
         run: python -m compileall -q lib scripts tools skills tests
       - name: 运行单元测试
