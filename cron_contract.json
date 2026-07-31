@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "scripts": [
+    "24h_assessment_reminder.py",
+    "24h_class_reminder.py",
+    "24h_daily_plan_reminder.py",
+    "24h_math_plan_reminder.py",
+    "24h_smoke_reminder.py"
+  ]
+}

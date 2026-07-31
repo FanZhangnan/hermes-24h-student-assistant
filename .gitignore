@@ -1,0 +1,33 @@
+# Git worktree 目录
+.worktrees/
+
+# Hermes 本地凭证与配置
+.env
+.env.*
+!.env.example
+auth.json
+config.yaml
+!config.example.yaml
+
+# Hermes 与产品运行时状态
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.log
+*.pid
+models_dev_cache.json
+cache/
+image_cache/
+
+# Python 本地生成文件
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# 操作系统与编辑器文件
+.DS_Store
+.vscode/
+.idea/

@@ -1,0 +1,15 @@
+# 仅展示配置边界；请通过 Hermes setup/config 命令写入用户自己的 Profile。
+model:
+  provider: custom
+  base_url: https://example.invalid/v1
+  api_key_env: MODEL_PROVIDER_API_KEY
+
+platforms:
+  telegram:
+    enabled: false
+    token_env: TELEGRAM_BOT_TOKEN
+  api_server:
+    enabled: true
+    host: 127.0.0.1
+    port: 8643
+    key_env: API_SERVER_KEY

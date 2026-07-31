@@ -1,0 +1,6 @@
+interface:
+  display_name: "Hermes 发布守门"
+  short_description: "在安装、更新、合并或公开发布前检查 Cron 契约、隐私和密钥风险"
+  default_prompt: "使用 $hermes-release-guard 在安装、合并或发布前检查这个 Hermes 扩展包。"
+policy:
+  allow_implicit_invocation: true

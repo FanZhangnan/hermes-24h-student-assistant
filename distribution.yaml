@@ -1,0 +1,11 @@
+name: 24h-assistant
+version: 0.2.0
+description: "基于 Hermes One 的 24h 留学助理阶段 0/1 扩展包"
+hermes_requires: ">=0.19.0"
+author: "24h 留学助理"
+license: "MIT"
+distribution_owned:
+  - SOUL.md
+  - skills
+  - scripts
+  - lib
