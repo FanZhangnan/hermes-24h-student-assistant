@@ -22,14 +22,14 @@ class SmokeScriptTest(unittest.TestCase):
                 check=True,
                 env=environment,
                 capture_output=True,
-                text=True,
+                encoding="utf-8",
             )
             result = subprocess.run(
                 [sys.executable, str(ROOT / "scripts" / "24h_smoke_reminder.py")],
                 check=True,
                 env=environment,
                 capture_output=True,
-                text=True,
+                encoding="utf-8",
             )
 
         self.assertEqual(
