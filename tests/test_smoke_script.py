@@ -12,7 +12,11 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 class SmokeScriptTest(unittest.TestCase):
     def test_script_prints_one_deterministic_message_without_network_code(self):
         with tempfile.TemporaryDirectory() as home:
-            environment = dict(os.environ, HERMES_HOME=home)
+            environment = dict(
+                os.environ,
+                HERMES_HOME=home,
+                PYTHONIOENCODING="ascii",
+            )
             subprocess.run(
                 [sys.executable, str(ROOT / "scripts" / "24h_assistant.py"), "init"],
                 check=True,

@@ -8,6 +8,7 @@ sys.path.insert(0, str(LIB))
 
 from study_assistant.paths import RuntimePaths
 from study_assistant.repository import Repository
+from study_assistant.i18n import configure_utf8_output
 
 
 def main():
@@ -18,4 +19,5 @@ def main():
 
 
 if __name__ == "__main__":
+    configure_utf8_output()
     raise SystemExit(main())

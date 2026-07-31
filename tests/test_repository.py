@@ -41,7 +41,11 @@ class RepositoryTest(unittest.TestCase):
     def test_non_windows_default_uses_dot_hermes_in_user_home(self):
         with patch.dict(os.environ, {"HOME": str(self.home)}, clear=True):
             with patch("lib.study_assistant.paths.os.name", "posix"):
-                paths = RuntimePaths.from_environment()
+                with patch(
+                    "lib.study_assistant.paths._ConcretePath.home",
+                    side_effect=RuntimeError("home lookup unavailable"),
+                ):
+                    paths = RuntimePaths.from_environment()
 
         self.assertEqual(paths.hermes_home, self.home / ".hermes")
 

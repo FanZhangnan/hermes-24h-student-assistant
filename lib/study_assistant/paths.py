@@ -24,7 +24,13 @@ class RuntimePaths:
                 raise RuntimeError("Windows 上必须存在 LOCALAPPDATA 环境变量")
             hermes_home = _ConcretePath(local_app_data) / "hermes"
         else:
-            hermes_home = _ConcretePath.home() / ".hermes"
+            raw_user_home = os.environ.get("HOME")
+            user_home = (
+                _ConcretePath(raw_user_home).expanduser()
+                if raw_user_home
+                else _ConcretePath.home()
+            )
+            hermes_home = user_home / ".hermes"
 
         data_dir = hermes_home / "24h-assistant"
         return cls(

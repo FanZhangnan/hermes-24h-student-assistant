@@ -3,6 +3,18 @@ import re
 import sys
 
 
+def configure_utf8_output():
+    """确保被 Hermes 捕获的中文脚本输出在各平台都使用 UTF-8。"""
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if not callable(reconfigure):
+            continue
+        try:
+            reconfigure(encoding="utf-8")
+        except (OSError, ValueError):
+            continue
+
+
 def _translate_error(message):
     required = re.fullmatch(r"the following arguments are required: (.+)", message)
     if required:

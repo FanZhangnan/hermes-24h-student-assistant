@@ -289,6 +289,7 @@ class DiagnosticsTest(unittest.TestCase):
         self.assertIn("paused-missing.py", report.checks["cron_scripts"].detail)
 
     def test_online_probes_use_explicit_minimal_commands(self):
+        image_path = pathlib.Path("/tmp/red.png")
         runner = FakeRunner(
             {
                 (
@@ -296,14 +297,14 @@ class DiagnosticsTest(unittest.TestCase):
                     "Reply with exactly MODEL_OK",
                 ): CommandResult(0, "MODEL_OK", ""),
                 (
-                    "chat", "--quiet", "--source", "tool", "--image", "/tmp/red.png",
+                    "chat", "--quiet", "--source", "tool", "--image", str(image_path),
                     "--query", "Reply with exactly VISION_OK if the image is a solid red square",
                 ): CommandResult(0, "VISION_OK", ""),
             }
         )
 
         self.assertEqual(verify_model(runner).stdout, "MODEL_OK")
-        self.assertEqual(verify_vision(runner, pathlib.Path("/tmp/red.png")).stdout,
+        self.assertEqual(verify_vision(runner, image_path).stdout,
                          "VISION_OK")
 
     def test_red_vision_fixture_is_a_small_png(self):

@@ -16,6 +16,7 @@ sys.path.insert(0, str(LIB))
 
 from study_assistant.paths import RuntimePaths  # noqa: E402
 from study_assistant.repository import Repository  # noqa: E402
+from study_assistant.i18n import configure_utf8_output  # noqa: E402
 
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -191,4 +192,5 @@ def main(now=None):
 
 
 if __name__ == "__main__":
+    configure_utf8_output()
     raise SystemExit(main())
