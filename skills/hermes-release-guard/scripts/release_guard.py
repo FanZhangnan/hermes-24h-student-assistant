@@ -17,7 +17,18 @@ def _parser():
     return parser
 
 
+def _configure_utf8_output(stream):
+    reconfigure = getattr(stream, "reconfigure", None)
+    if callable(reconfigure):
+        try:
+            reconfigure(encoding="utf-8")
+        except (OSError, ValueError):
+            pass
+
+
 def main(argv=None):
+    _configure_utf8_output(sys.stdout)
+    _configure_utf8_output(sys.stderr)
     args = _parser().parse_args(argv)
     root = Path(args.root).expanduser().resolve()
     guard = root / "tools" / "release_guard.py"

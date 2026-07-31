@@ -289,8 +289,18 @@ def build_parser():
     return parser
 
 
+def _configure_utf8_output(stream):
+    reconfigure = getattr(stream, "reconfigure", None)
+    if callable(reconfigure):
+        try:
+            reconfigure(encoding="utf-8")
+        except (OSError, ValueError):
+            pass
+    return stream
+
+
 def main(argv=None, stdout=None):
-    stdout = stdout or sys.stdout
+    stdout = _configure_utf8_output(stdout or sys.stdout)
     args = build_parser().parse_args(argv)
     report = audit_repository(args.root, args.mode, args.profile)
     print(report.to_json() if args.json else report.to_text(), file=stdout)

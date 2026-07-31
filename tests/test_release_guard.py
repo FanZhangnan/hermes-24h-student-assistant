@@ -1,4 +1,5 @@
 import hashlib
+import io
 import json
 import pathlib
 import tempfile
@@ -28,6 +29,19 @@ class ReleaseGuardTest(unittest.TestCase):
             "# Generic student assistant\n",
             encoding="utf-8",
         )
+
+    def test_cli_reconfigures_ascii_stream_for_chinese_output(self):
+        buffer = io.BytesIO()
+        stream = io.TextIOWrapper(buffer, encoding="ascii")
+
+        code = main(
+            ["--root", str(self.root), "--mode", "public"],
+            stdout=stream,
+        )
+        stream.flush()
+
+        self.assertEqual(code, 0)
+        self.assertIn("发布守门检查通过", buffer.getvalue().decode("utf-8"))
 
     def test_safe_public_repository_passes(self):
         report = audit_repository(self.root, "public")
